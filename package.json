@@ -9,13 +9,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "config": "^3.1.0",
+    "cors": "^2.8.5",
     "ejs": "^2.6.1",
     "express": "^4.17.1",
     "express-ejs-layouts": "^2.5.0",
     "express-validator": "^5.3.1",
     "jsonwebtoken": "^8.5.1",
     "nodemailer": "^6.2.1",
-    "request": "^2.88.0"
+    "papaparse": "^5.0.0",
+    "request": "^2.88.0",
+    "xlsx": "^0.14.3"
+  },
+  "devDependencies": {
+    "dotenv": "^8.0.0"
   }
 }
