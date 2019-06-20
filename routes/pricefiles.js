@@ -10,11 +10,11 @@ router.get('/', (req, res) => res.render('price_file_form'));
 // @Route /pricefiles
 // @Desc  Sends form data to the server
 // @Auth  Public
-router.post('/', (req, res) => {
+router.post('/pricefiles', (req, res) => {
   console.log(req.body);
   const { 
     userEmail, 
-    sapId, 
+    customerId, 
     customerFirstName, 
     customerLastName, 
     customerEmail, 
@@ -23,19 +23,17 @@ router.post('/', (req, res) => {
   let errors = [];
 
   if (!userEmail) {
-    errors.push({ msg: 'A LAPP email address is required'});
+    errors.push({ msg: 'A user email address is required'});
   } else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(userEmail)) {
     errors.push({ msg: `${userEmail} is not a valid email address`})
-  } else if (userEmail.slice(-12) !== '@lappusa.com') {
-    errors.push({ msg: 'Please enter a valid LAPP USA email address'});
   }
 
-  if (!sapId) {
-    errors.push({ msg: 'SAP customer Id is required'});
-  } else if (!/^[0-9]*$/.test(sapId)) { // Regex to check if sapId string contains only numbers
-    errors.push({ msg: 'SAP customer Id can only contain numbers'})
-  } else if (sapId.length !== 8) {
-    errors.push({ msg: 'SAP customer Id must be 8 characters'})
+  if (!customerId) {
+    errors.push({ msg: 'Customer Id is required'});
+  } else if (!/^[0-9]*$/.test(customerId)) { // Regex to check if customerId string contains only numbers
+    errors.push({ msg: 'Customer Id can only contain numbers'})
+  } else if (customerId.length !== 8) {
+    errors.push({ msg: 'Customer Id must be 8 digits'})
   }
   
   if (!customerFirstName) {
@@ -60,7 +58,7 @@ router.post('/', (req, res) => {
     res.render('price_file_form', {
       errors,
       userEmail, 
-      sapId, 
+      customerId, 
       customerFirstName, 
       customerLastName, 
       customerEmail, 
@@ -78,8 +76,8 @@ router.post('/', (req, res) => {
     const mailOptions = {
       from: 'abovino@lappusa.com',
       to: 'angelo.bovino@outlook.com',
-      subject: `Price File for Customer ${sapId}`,
-      text: `Here is your price file for customer # ${sapId}`,
+      subject: `Price File for Customer ${customerId}`,
+      text: `Here is your price file for customer # ${customerId}`,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
