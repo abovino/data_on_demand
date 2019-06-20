@@ -15,6 +15,6 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 
 // Routes
-app.use('/pricefiles', require('./routes/pricefiles'));
+app.use('/', require('./routes/pricefiles'));
 
 app.listen(PORT, (req, res) => console.log(`Server listening on PORT ${PORT}`));
