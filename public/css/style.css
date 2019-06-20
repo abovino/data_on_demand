@@ -1,6 +1,16 @@
+body {
+  font-family: sans-serif;
+}
+
+.navbar-dark .navbar-brand {
+  margin: 0 auto;
+  letter-spacing: 2px;
+}
+
 .form-container {
   max-width: 700px;
   margin: 0 auto;
+  padding-top: 3rem;
 }
 
 .alert {
