@@ -1,0 +1,78 @@
+<form method="POST" action="/pricefiles">
+  <fieldset>
+    <legend>User Info</legend>
+    <div class="form-group">
+      <label for="userEmail">Email address</label>
+      <input 
+        type="text"
+        name="userEmail"
+        id="userEmail"
+        class="form-control form-control-sm"
+        aria-describedby="userEmailHelp"
+        placeholder="youremail@lappusa.com"
+        value="<%= typeof userEmail != 'undefined' ? userEmail : '' %>">
+      <small id="userEmailHelp" class="form-text text-muted">The file will be sent to this email address (Internal emails only)</small>
+    </div>
+  </fieldset>
+  <fieldset class="form-group">
+    <legend>Customer Info</legend>
+    <div class="form-group">
+        <label for="sap-id">SAP ID</label>
+        <input
+          type="text"
+          name="sapId" 
+          id="sapId"
+          class="form-control form-control-sm"  
+          aria-describedby="sapIdHelp" 
+          placeholder="21121000"
+          value="<%= typeof sapId != 'undefined' ? sapId : '' %>">
+      </div>
+    <div class="form-group">
+      <label for="customerFirstName">First Name</label>
+      <input
+        type="text" 
+        name="customerFirstName" 
+        id="customerFirstName"
+        class="form-control form-control-sm"  
+        aria-describedby="customerFirstNameHelp" 
+        placeholder="John"
+        value="<%= typeof customerFirstName != 'undefined' ? customerFirstName : '' %>">
+    </div>
+    <div class="form-group">
+      <label for="customerLastName">Last Name</label>
+      <input
+        type="text"
+        name="customerLastName" 
+        id="customerLastName"
+        class="form-control form-control-sm"  
+        aria-describedby="customerLastNameHelp" 
+        placeholder="Smith"
+        value="<%= typeof customerLastName != 'undefined' ? customerLastName : '' %>">
+    </div>
+    <div class="form-group">
+      <label for="customerEmail">Customer Email address</label>
+      <input
+        type="text"
+        name="customerEmail" 
+        id="customerEmail"
+        class="form-control form-control-sm" 
+        aria-describedby="emailHelp" 
+        placeholder="Enter email"
+        value="<%= typeof customerEmail != 'undefined' ? customerEmail : '' %>">
+      <small id="emailHelp" class="form-text text-muted">No emails will be sent to the customer -- This is for tracking purposes only</small>
+    </div>
+    <div class="form-group">
+      <label for="customer-title">Title</label>
+      <input 
+        name="customerTitle" 
+        type="text" 
+        class="form-control form-control-sm" 
+        id="customer-title" 
+        aria-describedby="customer-title_help" 
+        placeholder="Pricing Analyst"
+        value="<%= typeof customerTitle != 'undefined' ? customerTitle : '' %>">
+    </div>
+  </fieldset>
+  <% include ./partials/messages %>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
