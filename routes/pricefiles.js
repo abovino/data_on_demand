@@ -2,6 +2,7 @@ const express = require('express');
 const nodeMailer = require('nodeMailer');
 const fs = require('fs');
 const papa = require('papaparse');
+const ejs = require('ejs');
 const createPrices = require('../utils/createPrices');
 const router = express.Router();
 
@@ -10,11 +11,25 @@ const router = express.Router();
 // @Auth  Public
 router.get('/', (req, res) => res.render('price_file_form'));
 
+// @Route /success
+// @Desc  If email is succesfully sent to user then /pricefiles redirects to /success
+// @Auth  Public
+router.get('/success', (req, res) => {
+  if (!req.session.customerId || !req.session.userEmail) {
+    res.redirect('/')
+  } else {
+    res.render('success', {
+      customerId: req.session.customerId,
+      userEmail: req.session.userEmail
+    });
+  }
+});
+
 // @Route /pricefiles
 // @Desc  Sends form data to the server
 // @Auth  Public
 router.post('/pricefiles', (req, res) => {
-  console.log(req.body);
+  
   const { 
     userEmail, 
     customerId, 
@@ -75,7 +90,6 @@ router.post('/pricefiles', (req, res) => {
 
     fs.writeFile(`./price_files/${fileName}.csv`, pricesCSV, (err) => {
       if (err) throw err;
-      console.log('File created');
     });
 
     const transporter = nodeMailer.createTransport({
@@ -86,32 +100,40 @@ router.post('/pricefiles', (req, res) => {
       }
     });
 
-    const mailOptions = {
-      from: process.env.EMAIL,
-      to: userEmail,
-      subject: `Price File for Customer ${customerId}`,
-      text: `Here is your price file for customer # ${customerId}`,
-      attachments: [{
-        filename: `${fileName}.csv`,
-        path: `./price_files/${fileName}.csv`
-      }]
-    };
-
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.log(error);
+    // Render the email.ejs template as html and send to userEmail
+    ejs.renderFile(__dirname + '/../views/email.ejs', {
+      customerId: customerId,
+      customerFirstName: customerFirstName,
+      customerLastName: customerLastName,
+      customerTitle: customerTitle,
+      customerEmail: customerEmail,
+    }, (err, email) => {
+      if (err) {
+        console.log(err);
       } else {
-        console.log(info);
-        // res.send(`Email sent ${info}`);
-        res.render('price_file_form', {
-          success: {
-            msg: `Success!  Price file sent to ${userEmail}`
+        const mailOptions = {
+          from: process.env.EMAIL,
+          to: userEmail,
+          subject: `Price File for Customer ${customerId}`,
+          html: email,
+          attachments: [{
+            filename: `${fileName}.csv`,
+            path: `./price_files/${fileName}.csv`
+          }],
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            console.log(error);
+          } else {
+            req.session.customerId = customerId;
+            req.session.userEmail = userEmail;
+            res.redirect('/success');
           }
         });
       }
     });
   }
-
 });
 
 module.exports = router;
