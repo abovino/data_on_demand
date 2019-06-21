@@ -1,4 +1,5 @@
 <% include ./partials/success %>
+<% include ./partials/messages %>
 <form id="form" method="POST" action="/pricefiles">
   <fieldset>
     <legend>User Info</legend>
@@ -74,6 +75,5 @@
         value="<%= typeof customerTitle != 'undefined' ? customerTitle : '' %>">
     </div>
   </fieldset>
-  <% include ./partials/messages %>
   <button id="form-submit" class="btn btn-primary" type="submit">Submit</button>
 </form>
