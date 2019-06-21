@@ -10,7 +10,7 @@ body {
 .form-container {
   max-width: 700px;
   margin: 0 auto;
-  padding-top: 3rem;
+  padding: 2rem 0;
 }
 
 .alert {
@@ -20,4 +20,12 @@ body {
 
 .alert-dismissible .close {
   padding: 3px
+}
+
+.alert-success {
+  padding: 10px;
+}
+
+.alert-success .close {
+  padding: 10px;
 }
