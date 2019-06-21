@@ -105,11 +105,11 @@ router.post('/pricefiles', (req, res) => {
         // res.send(`Email sent ${info}`);
         res.render('price_file_form', {
           success: {
-            msg: 'Email sent successfully'
+            msg: `Success!  Price file sent to ${userEmail}`
           }
-        })
+        });
       }
-    })
+    });
   }
 
 });
