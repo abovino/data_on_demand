@@ -29,3 +29,9 @@ body {
 .alert-success .close {
   padding: 10px;
 }
+
+#success-card {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 29rem;
+}
