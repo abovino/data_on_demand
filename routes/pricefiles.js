@@ -1,5 +1,5 @@
 const express = require('express');
-//const nodeMailer = require('nodeMailer');
+const nodeMailer = require('nodemailer');
 const fs = require('fs');
 const papa = require('papaparse');
 const ejs = require('ejs');
@@ -33,7 +33,7 @@ router.get('/success', (req, res) => {
 router.get('/download/file/:uid', (req, res, next) => {
   if (!req.session.customerId || !req.session.userEmail) {
     res.render('error', {
-      errMsg: 'There\'s nothing here.'
+      errMsg: 'There\'s nothing here.  Your session may have timed out, or the download link expired.'
     });
   } else if (req.params.uid !== req.session.uid) {
     res.render('error', {
@@ -48,6 +48,7 @@ router.get('/download/file/:uid', (req, res, next) => {
           errMsg: 'The server encountered an error and your file could not be found.  The download link may have expired.'
         });
       } else {
+				req.session.destroy(); // Kill the session so the user can't get back to the download link
         fs.unlink(path.join(__dirname, `../price_files/${uid}.csv`), (err) => {
           console.log(err);
         });
