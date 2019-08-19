@@ -50,7 +50,9 @@ router.get('/download/file/:uid', (req, res, next) => {
       } else {
 				req.session.destroy(); // Kill the session so the user can't get back to the download link
         fs.unlink(path.join(__dirname, `../price_files/${uid}.csv`), (err) => {
-          console.log(err);
+          if (err) {
+						console.log(err);
+					}
         });
       }
     })
