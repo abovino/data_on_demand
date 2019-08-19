@@ -1,3 +1,6 @@
+// Creates an object with 2 properites:
+//  obj.fields = CSV parser used the fields array to create headers for the csv file
+//  obj.data   = An array of nested arrays containing material and price info
 const createPrices = () => {
   let obj = {};
   obj.fields = [
