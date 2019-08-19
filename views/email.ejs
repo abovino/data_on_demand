@@ -1,12 +1,34 @@
 <style type="text/css">
-  .container {
-    text-align: center;
+  table {
+    border-collapse: collapse;
+  }
+  td, th {
+    border: 1px solid;
+    padding: 5px;
+  }
+  caption {
+    border: 1px solid;
+    border-bottom: none;
+    padding: 5px;
   }
 </style>
 
-<div class="container">
-  <h4>Price file for customer #<%= customerId %> attached</h4>
-  <h4><%= customerFirstName %> <%= customerLastName %></h4>
-  <h4><%= customerTitle %></h4>
-  <h4><%= customerEmail %></h4>
-</div>
+<table>
+  <caption>Customer Info</caption>
+  <tr>
+    <td>Customer ID</td>
+    <td><%= customerId %></td>
+  </tr>
+  <tr>
+    <td>Name</td>
+    <td><%= customerFirstName %> <%= customerLastName %></td>
+  </tr>
+  <tr>
+    <td>Title</td>
+    <td><%= customerTitle %></td>
+  </tr>
+  <tr>
+    <td>Email</td>
+    <td><%= customerEmail %></td>
+  </tr>
+</table>
