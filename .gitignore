@@ -62,3 +62,6 @@ typings/
 
 # csv files
 .csv
+
+# price_files dir
+price_files/
