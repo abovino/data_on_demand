@@ -30,8 +30,25 @@ body {
   padding: 10px;
 }
 
-#success-card {
+#msg-card {
   text-align: center;
   margin: 0 auto;
   max-width: 29rem;
+}
+
+#download-link {
+  display: block;
+  font-size: 20px;
+  margin: 10px 0;
+  transition: transform .2s linear;
+}
+
+#download-link:hover {
+  transform: scale(1.1);
+}
+
+.download-complete-msg {
+  font-size: 28px;
+  font-weight: bold;
+  color: green;
 }
