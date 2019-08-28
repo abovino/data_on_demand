@@ -11,23 +11,24 @@
         id="userEmail"
         class="form-control form-control-sm"
         aria-describedby="userEmailHelp"
-        placeholder="youremail@lappusa.com"
+        placeholder="test@test.com"
         value="<%= typeof userEmail != 'undefined' ? userEmail : '' %>">
-      <small id="userEmailHelp" class="form-text text-muted">The file will be sent to this email address (Internal emails only)</small>
+      <small id="userEmailHelp" class="form-text text-muted">You do not need to use a real email address.  This is for demo purposes only (Ex: test@test.com)</small>
     </div>
   </fieldset>
   <fieldset class="form-group">
     <legend>Customer Info</legend>
     <div class="form-group">
-        <label for="sap-id">Customer ID</label>
+        <label for="sap-id">Customer ID #</label>
         <input
-          type="text"
+          type="number"
           name="customerId" 
           id="customerId"
           class="form-control form-control-sm"  
           aria-describedby="customerIdHelp" 
           placeholder="21121000"
           value="<%= typeof customerId != 'undefined' ? customerId : '' %>">
+          <small id="customerIdHelp" class="form-text text-muted">Must be 8 digits</small>
       </div>
     <div class="form-group">
       <label for="customerFirstName">First Name</label>
@@ -59,9 +60,9 @@
         id="customerEmail"
         class="form-control form-control-sm" 
         aria-describedby="emailHelp" 
-        placeholder="Enter email"
+        placeholder="test@test.com"
         value="<%= typeof customerEmail != 'undefined' ? customerEmail : '' %>">
-      <small id="emailHelp" class="form-text text-muted">No emails will be sent to the customer -- This is for tracking purposes only</small>
+      <small id="emailHelp" class="form-text text-muted">You do not need to use a real email address.  This is for demo purposes only (Ex: test@test.com)</small>
     </div>
     <div class="form-group">
       <label for="customer-title">Title</label>
